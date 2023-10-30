@@ -75,15 +75,15 @@ Route::get('/blog' ,function (Request $request)  {
             // display :  {"name":"adnan"}
 
         //   l'avanatage de cet methode when we have nothing  ne vas pas avoir un erreur  
-            // http://127.0.0.1:8000/blog
+            // lien : http://127.0.0.1:8000/blog
             // display : {"name":null}
 
 });
 
 
-    // http://127.0.0.1:8000/blog/my-first-chance-15 
+    // lien : http://127.0.0.1:8000/blog/my-first-chance-15 
 
-    //  {"slug":"my","id":"first-chance-15"}
+    //  display : {"slug":"my","id":"first-chance-15"}
             // Pour la recuperation des parametre type 'chaine de carractere ' qui se trouve dans l'URL  
             // cuz it is defficult to change all the links partout. Solution = nommination des liens pour les trouver tres rapidement 
          
@@ -107,8 +107,8 @@ Route::get('/blog' ,function (Request $request)  {
                 "slug" => $slug ,
                 'id' => $id ,
                 'name'  =>$request ->input ('name'),
-                //   http://127.0.0.1:8000/blog/my-first-chance-15?name=yas
-                // {"slug":"my-first-chance","id":"15","name":"yas"}
+                //  lien : http://127.0.0.1:8000/blog/my-first-chance-15?name=yas
+                //  display : {"slug":"my-first-chance","id":"15","name":"yas"}
     
             ];
 
