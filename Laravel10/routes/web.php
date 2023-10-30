@@ -77,7 +77,3 @@ Route::get('/', function () {
             dd($post) ;
             return ($post) ;
     })->name('index');
- 
-   
-
-
