@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\posts;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 // Les Controllers ce sont simplement des classes qui ont comme objectif de regrouper...
@@ -18,9 +19,9 @@ class BlogController extends Controller
 {
     //
 
-    public function index (): Paginator {
-        return posts::paginate(25);
-
+    public function index (): View {
+        $post = posts::paginate(25);
+        return view(('blog.index'));
     }
 
     public function show(string $slug, string $id): RedirectResponse | posts
