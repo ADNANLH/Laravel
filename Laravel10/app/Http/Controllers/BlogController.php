@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\RedirectResponse;
 
+// Les Controllers ce sont simplement des classes qui ont comme objectif de regrouper...
+// les fonctions qui vont contenir la logique de notre application. Au niveau de Laravel,...
+// je peux créer un contrôleur grâce à la commande php artisan make:controller.
 
 
 //les controller se sont des manières d'organiser le code et regrouper les methodes de la meme logique et qui permet une code bien organiser 
