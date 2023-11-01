@@ -20,16 +20,19 @@ class BlogController extends Controller
     //
 
     public function index (): View {
-        $post = posts::paginate(25);
-        return view(('blog.index'));
+        return view ('blog.index', [
+            'posts' => posts::paginate(2)
+        ]);
     }
 
-    public function show(string $slug, string $id): RedirectResponse | posts
+    public function show(string $slug, string $id): RedirectResponse | view
     {
         $post = posts::findOrFaild($id);
         if($post->slug ==! $slug ){
             return to_route('blog.show', ['slug' => $post->slug, 'id'=>$post->id]);
         }
-        return $post;
+        return view('blog.show', [
+            'post' => $post
+        ]);
     }
 }
