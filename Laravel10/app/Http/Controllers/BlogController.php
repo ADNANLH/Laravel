@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\posts;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\Pagination\Paginator;
 
 // Les Controllers ce sont simplement des classes qui ont comme objectif de regrouper...
 // les fonctions qui vont contenir la logique de notre application. Au niveau de Laravel,...
@@ -25,11 +25,11 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(string $slug, string $id): RedirectResponse | view
+    public function show(string $slug, string $id): RedirectResponse | View
     {
-        $post = posts::findOrFaild($id);
-        if($post->slug ==! $slug ){
-            return to_route('blog.show', ['slug' => $post->slug, 'id'=>$post->id]);
+        $post = posts::findOrFail($id);
+        if($post->slug !== $slug ){
+            return to_route('blog.show', ['slug' => $post->slug, 'id' => $post->id]);
         }
         return view('blog.show', [
             'post' => $post

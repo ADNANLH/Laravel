@@ -18,6 +18,6 @@ route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
 
     Route::get('/{slug}-{id}', 'show')->where([
         'id' => '[0-9]+',
-        'slug'=> '[a-z0-9-]'
+        'slug'=> '[a-z0-9\-]+'
     ])->name('show');
 });
