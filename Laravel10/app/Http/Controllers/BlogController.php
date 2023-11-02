@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogFilterRequest;
 use App\Models\posts;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 // Les Controllers ce sont simplement des classes qui ont comme objectif de regrouper...
 // les fonctions qui vont contenir la logique de notre application. Au niveau de Laravel,...
@@ -17,12 +20,34 @@ use Illuminate\Contracts\Pagination\Paginator;
 
 class BlogController extends Controller
 {
-    //
+    // 12:49 min
 
-    public function index (): View {
+    public function index (BlogFilterRequest $request): View {
+
+        
+        // $validator = Validator::make([
+        //     'title' => 'title title',
+
+        // ], [
+        //     'title' => 'required|min:8'
+        //     // 'title' => ['required', 'min:8', 'regex']
+        //     // 'title' => [Rule::('posts')->ignore(2)]
+        //     // 'title' => ['unique:posts']
+        // ]);
+
+        
+        // dd($validator->fails());
+            // aficher true ou false
+        // dd($validator->errors()); 
+            // aficher les message d'errors
+        // dd($validator->validated());
+            // aficher les element qui ont valider
+            
+        dd($request->validated());
         return view ('blog.index', [
             'posts' => posts::paginate(2)
         ]);
+        
     }
 
     public function show(string $slug, string $id): RedirectResponse | View
@@ -36,3 +61,5 @@ class BlogController extends Controller
         ]);
     }
 }
+
+//  php artisan make:request BlogFilterRequest
