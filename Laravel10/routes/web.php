@@ -36,4 +36,5 @@ route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
             'post'=> '[a-z0-9\-]+'
         ])->name('show');
     */
+    
 });
