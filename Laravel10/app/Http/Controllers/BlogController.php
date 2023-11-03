@@ -22,28 +22,8 @@ class BlogController extends Controller
 {
     // 12:49 min
 
-    public function index (BlogFilterRequest $request): View {
+    public function index (): View {
 
-        
-        // $validator = Validator::make([
-        //     'title' => 'title title',
-
-        // ], [
-        //     'title' => 'required|min:8'
-        //     // 'title' => ['required', 'min:8', 'regex']
-        //     // 'title' => [Rule::('posts')->ignore(2)]
-        //     // 'title' => ['unique:posts']
-        // ]);
-
-        
-        // dd($validator->fails());
-            // aficher true ou false
-        // dd($validator->errors()); 
-            // aficher les message d'errors
-        // dd($validator->validated());
-            // aficher les element qui ont valider
-            
-        dd($request->validated());
         return view ('blog.index', [
             'posts' => posts::paginate(2)
         ]);
