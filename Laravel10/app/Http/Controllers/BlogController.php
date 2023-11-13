@@ -33,6 +33,7 @@ class BlogController extends Controller
     public function show(string $slug, Posts $post ): RedirectResponse | View
     {
         // dd($post);
+
         
 
         if($post->slug !== $slug ){
@@ -41,6 +42,8 @@ class BlogController extends Controller
         return view('blog.show', [
             'post' => $post
         ]);
+
+       
     }
 }
 
