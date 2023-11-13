@@ -32,6 +32,9 @@ class BlogController extends Controller
 
     public function show(string $slug, Posts $post ): RedirectResponse | View
     {
+        // dd($post);
+        
+
         if($post->slug !== $slug ){
             return to_route('blog.show', ['slug' => $post->slug, 'id' => $post->id]);
         }
