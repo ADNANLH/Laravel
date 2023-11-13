@@ -20,7 +20,6 @@ use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
 {
-    // 12:49 min
 
     public function index (): View {
 
@@ -29,6 +28,12 @@ class BlogController extends Controller
         ]);
         
     }
+
+    public function create(){
+        return view('blog.create');
+    }
+
+
 
     public function show(string $slug, Posts $post ): RedirectResponse | View
     {
@@ -47,4 +52,3 @@ class BlogController extends Controller
     }
 }
 
-//  php artisan make:request BlogFilterRequest
