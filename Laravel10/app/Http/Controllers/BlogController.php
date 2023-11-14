@@ -33,6 +33,7 @@ class BlogController extends Controller
     }
 
     public function create(){
+        dd(session()->all());
         return view('blog.create');
     }
 
@@ -46,7 +47,7 @@ class BlogController extends Controller
             return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
         }
     */
-    //autre methode avec la validation
+    // ---- autre methode avec la validation ----
 
     public function store(CreatePostRequest $request){
         $post = Posts::create($request->validated());
