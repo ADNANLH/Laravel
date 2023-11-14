@@ -50,7 +50,11 @@
 
     <div class="container">
       {{-- @dump(request()->route()->getName()) get the route of the view   "blog.index" // resources\views/base.blade.php --}}
-
+      @if(session('success'))
+        <div class="alert alert-success">
+          {{session('success')}}
+        </div>     
+      @endif
       @yield('content')
     </div>
     

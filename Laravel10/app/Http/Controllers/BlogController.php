@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BlogFilterRequest;
+use Str;
 use App\Models\posts;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\BlogFilterRequest;
+use App\Http\Requests\CreatePostRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str as SupportStr;
+use Illuminate\Contracts\Pagination\Paginator;
 
 // Les Controllers ce sont simplement des classes qui ont comme objectif de regrouper...
 // les fonctions qui vont contenir la logique de notre application. Au niveau de Laravel,...
@@ -32,6 +35,24 @@ class BlogController extends Controller
     public function create(){
         return view('blog.create');
     }
+
+    /*
+        public function store(Request $request){
+            $post = Posts::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'slug' => \Str::slug($request->input('title'))
+            ]);
+            return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
+        }
+    */
+    //autre methode avec la validation
+
+    public function store(CreatePostRequest $request){
+        $post = Posts::create($request->validated());
+        return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
+    }
+
 
 
 
