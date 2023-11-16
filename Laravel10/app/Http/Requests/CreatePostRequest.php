@@ -25,7 +25,7 @@ class CreatePostRequest extends FormRequest
         return [
             //
             'title' => ['required', 'min:8'],
-            'slug' => ['required', 'min:8', 'regex:/^[0-9a-z\-]+$/'],
+            'slug' => ['required', 'min:8', 'regex:/^[0-9a-z\-]+$/', 'unique:posts'],
             'content' => ['required']
         ];
     }

@@ -31,9 +31,24 @@ class BlogController extends Controller
         ]);
         
     }
+    public function show(string $slug, Posts $post ): RedirectResponse | View
+    {
+        // dd($post);
+
+        
+
+        if($post->slug !== $slug ){
+            return to_route('blog.show', ['slug' => $post->slug, 'id' => $post->id]);
+        }
+        return view('blog.show', [
+            'post' => $post
+        ]);
+
+       
+    }
 
     public function create(){
-        dd(session()->all());
+        // dd(session()->all());
         return view('blog.create');
     }
 
@@ -52,25 +67,17 @@ class BlogController extends Controller
     public function store(CreatePostRequest $request){
         $post = Posts::create($request->validated());
         return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
+    } 
+
+    public function edit(Posts $post){
+        return view('blog.edit',[
+            'post'=> $post
+        ]);
     }
 
-
-
-
-    public function show(string $slug, Posts $post ): RedirectResponse | View
-    {
-        // dd($post);
-
-        
-
-        if($post->slug !== $slug ){
-            return to_route('blog.show', ['slug' => $post->slug, 'id' => $post->id]);
-        }
-        return view('blog.show', [
-            'post' => $post
-        ]);
-
-       
+    public function update(Posts $post, CreatePostRequest $request){
+        $post->update($request->validated());
+        return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
     }
 }
 
