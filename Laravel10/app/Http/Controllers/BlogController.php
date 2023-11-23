@@ -20,42 +20,23 @@ use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
 {
-    // 12:49 min
+   
 
-    public function index (BlogFilterRequest $request): View {
-
-        
-        // $validator = Validator::make([
-        //     'title' => 'title title',
-
-        // ], [
-        //     'title' => 'required|min:8'
-        //     // 'title' => ['required', 'min:8', 'regex']
-        //     // 'title' => [Rule::('posts')->ignore(2)]
-        //     // 'title' => ['unique:posts']
-        // ]);
-
-        
-        // dd($validator->fails());
-            // aficher true ou false
-        // dd($validator->errors()); 
-            // aficher les message d'errors
-        // dd($validator->validated());
-            // aficher les element qui ont valider
-            
-        dd($request->validated());
+    public function index (): View {
+       
         return view ('blog.index', [
             'posts' => posts::paginate(2)
         ]);
         
     }
 
-    public function show(string $slug, string $id): RedirectResponse | View
+    public function show(string $slug, Posts $post): RedirectResponse | View
     {
-        $post = posts::findOrFail($id);
+       
         if($post->slug !== $slug ){
             return to_route('blog.show', ['slug' => $post->slug, 'id' => $post->id]);
         }
+        
         return view('blog.show', [
             'post' => $post
         ]);
