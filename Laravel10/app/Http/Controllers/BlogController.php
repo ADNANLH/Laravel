@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BlogFilterRequest;
-use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\FormPostRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str as SupportStr;
 use Illuminate\Contracts\Pagination\Paginator;
@@ -49,7 +49,10 @@ class BlogController extends Controller
 
     public function create(){
         // dd(session()->all());
-        return view('blog.create');
+        $post = new Posts();
+        return view('blog.create', [
+            'post' =>$post
+        ]);
     }
 
     /*
@@ -64,7 +67,7 @@ class BlogController extends Controller
     */
     // ---- autre methode avec la validation ----
 
-    public function store(CreatePostRequest $request){
+    public function store(FormPostRequest $request){
         $post = Posts::create($request->validated());
         return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
     } 
@@ -75,7 +78,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function update(Posts $post, CreatePostRequest $request){
+    public function update(Posts $post, FormPostRequest $request){
         $post->update($request->validated());
         return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
     }
