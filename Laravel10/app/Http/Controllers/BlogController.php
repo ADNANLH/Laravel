@@ -48,7 +48,7 @@ class BlogController extends Controller
     }
 
     public function create(){
-        // dd(session()->all());
+
         $post = new Posts();
         return view('blog.create', [
             'post' =>$post
@@ -72,6 +72,7 @@ class BlogController extends Controller
         return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
     } 
 
+
     public function edit(Posts $post){
         return view('blog.edit',[
             'post'=> $post
@@ -80,7 +81,7 @@ class BlogController extends Controller
 
     public function update(Posts $post, FormPostRequest $request){
         $post->update($request->validated());
-        return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été sauvegardé");
+        return redirect()->route('blog.show', ['slug' => $post->slug, 'post' => $post->id])->with('success', "l'article a bien été modifiée");
     }
 }
 
